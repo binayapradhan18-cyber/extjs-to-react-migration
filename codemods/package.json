@@ -1,0 +1,18 @@
+{
+  "name": "@migration/codemods",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AST codemods used during the migration (Ext.define model -> TypeScript interface + Zod schema).",
+  "type": "module",
+  "scripts": {
+    "codegen": "node src/cli.ts ../legacy-extjs/src/app/model/Task.js ../packages/bridge/src/contracts/task.generated.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "typescript": "~5.9.2"
+  },
+  "devDependencies": {
+    "zod": "^4.1.11"
+  }
+}

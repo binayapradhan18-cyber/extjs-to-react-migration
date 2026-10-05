@@ -1,0 +1,41 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: #f3f4f6;
+}
+
+.rw-root .rw-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.rw-root .rw-app__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #1f2937;
+  color: #fff;
+}
+
+.rw-root .rw-app__tag {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #374151;
+  font-size: 11px;
+}
+
+.rw-root .rw-app__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0 16px 16px;
+}
+
+.rw-root .rw-app__main .rw-tasks {
+  flex: 1;
+}

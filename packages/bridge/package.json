@@ -1,0 +1,39 @@
+{
+  "name": "@migration/bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interop layer between the Ext JS shell and React widgets: ReactHost component, typed event bus, store adapter, feature-flag router.",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./src/react.ts",
+      "default": "./dist/react.js"
+    },
+    "./locales/*": "./locales/*"
+  },
+  "files": [
+    "dist",
+    "locales"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^4.1.11"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

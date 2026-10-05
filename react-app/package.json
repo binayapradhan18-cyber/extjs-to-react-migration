@@ -1,0 +1,32 @@
+{
+  "name": "@migration/react-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "React re-implementation of the Project Tasks module: standalone app and embeddable widget bundle.",
+  "type": "module",
+  "exports": {
+    "./widget": {
+      "types": "./src/widget.tsx",
+      "default": "./dist-widget/tasks-widget.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:app && npm run build:widget",
+    "build:app": "vite build",
+    "build:widget": "vite build --mode widget",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@migration/bridge": "*",
+    "@tanstack/react-query": "^5.90.2",
+    "@tanstack/react-table": "^8.21.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.63.0",
+    "zod": "^4.1.11"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "total": 14,
+  "data": [
+    { "id": "T-101", "title": "Survey site boundaries", "status": "done", "priority": 2, "assignee": "Priya Nair", "dueDate": "2026-09-12", "estimateHours": 6 },
+    { "id": "T-102", "title": "Excavate foundation trench", "status": "done", "priority": 3, "assignee": "Marco Diaz", "dueDate": "2026-09-22", "estimateHours": 24 },
+    { "id": "T-103", "title": "Pour footing concrete", "status": "in_progress", "priority": 4, "assignee": "Marco Diaz", "dueDate": "2026-10-02", "estimateHours": 16 },
+    { "id": "T-104", "title": "Rebar inspection (city)", "status": "blocked", "priority": 4, "assignee": "Ana Kowalski", "dueDate": "2026-10-03", "estimateHours": 2 },
+    { "id": "T-105", "title": "Order structural steel", "status": "in_progress", "priority": 3, "assignee": "Liam O'Connor", "dueDate": "2026-10-09", "estimateHours": 4 },
+    { "id": "T-106", "title": "Install underground plumbing", "status": "todo", "priority": 3, "assignee": "Grace Okafor", "dueDate": "2026-10-14", "estimateHours": 30 },
+    { "id": "T-107", "title": "Waterproof foundation walls", "status": "todo", "priority": 2, "assignee": null, "dueDate": "2026-10-17", "estimateHours": 12 },
+    { "id": "T-108", "title": "Backfill and compact", "status": "todo", "priority": 2, "assignee": "Marco Diaz", "dueDate": "2026-10-21", "estimateHours": 10 },
+    { "id": "T-109", "title": "Erect steel frame — level 1", "status": "todo", "priority": 4, "assignee": "Liam O'Connor", "dueDate": "2026-10-30", "estimateHours": 48 },
+    { "id": "T-110", "title": "Submit electrical permit", "status": "blocked", "priority": 3, "assignee": "Ana Kowalski", "dueDate": "2026-09-30", "estimateHours": 1.5 },
+    { "id": "T-111", "title": "Select façade samples with client", "status": "todo", "priority": 1, "assignee": "Priya Nair", "dueDate": null, "estimateHours": 3 },
+    { "id": "T-112", "title": "Update safety plan for crane work", "status": "in_progress", "priority": 4, "assignee": "Grace Okafor", "dueDate": "2026-10-06", "estimateHours": 5 },
+    { "id": "T-113", "title": "Weekly owner report", "status": "todo", "priority": 2, "assignee": "Priya Nair", "dueDate": "2026-10-08", "estimateHours": 2 },
+    { "id": "T-114", "title": "Temporary power hookup", "status": "done", "priority": 2, "assignee": null, "dueDate": "2026-09-18", "estimateHours": 4 }
+  ]
+}

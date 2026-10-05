@@ -1,0 +1,17 @@
+{
+  "name": "@migration/legacy-extjs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Legacy Ext JS-style shell (ExtLite) with the Project Tasks module; hosts React modules behind feature flags.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@migration/bridge": "*",
+    "@migration/react-app": "*"
+  }
+}

@@ -1,0 +1,132 @@
+.shell-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 10px;
+  background: #e4e7ea;
+  border-top: 1px solid var(--app-border);
+  font-size: 12px;
+  color: #444;
+}
+
+.tasks-main .x-panel-body {
+  overflow: hidden;
+}
+
+.tasks-main .x-grid,
+.tasks-main .x-form {
+  margin: 8px;
+}
+
+.tasks-main .x-grid .x-panel-body {
+  overflow: auto;
+}
+
+.t-status {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 11px;
+  background: #e6e6e6;
+}
+
+.t-status-in_progress {
+  background: #dbeafe;
+}
+
+.t-status-blocked {
+  background: #fde2e1;
+  color: #8a1c1c;
+}
+
+.t-status-done {
+  background: #dcf5e3;
+  color: #1d6b35;
+}
+
+.t-overdue {
+  color: var(--app-danger);
+  font-weight: bold;
+}
+
+.t-muted {
+  color: var(--app-text-muted);
+  font-style: italic;
+}
+
+.cmp-header {
+  padding: 14px 18px 10px;
+  background: #2b3a4a;
+  color: #fff;
+}
+
+.cmp-header h1 {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.cmp-header p {
+  margin: 0;
+  max-width: 980px;
+  opacity: 0.85;
+}
+
+.cmp-header code {
+  padding: 0 4px;
+  background: rgb(255 255 255 / 0.12);
+  border-radius: 3px;
+}
+
+.cmp-row {
+  gap: 12px;
+  padding: 12px;
+}
+
+.cmp-pane {
+  gap: 8px;
+  min-width: 0;
+}
+
+.cmp-pane-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.cmp-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.cmp-badge-before {
+  background: #6b7280;
+}
+
+.cmp-badge-after {
+  background: #16a34a;
+}
+
+.cmp-title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.cmp-note {
+  color: var(--app-text-muted);
+  font-size: 12px;
+}
+
+/* Half-width panes: stack the grid above the form on both sides. */
+.compare .tasks-main > .x-panel-body,
+.compare .rw-root .rw-tasks__body {
+  flex-direction: column;
+}
+
+.compare .rw-root .rw-tasks__body > * {
+  flex: 1 1 0;
+}
