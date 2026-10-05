@@ -6,6 +6,8 @@ It is small enough to read in an afternoon but uses the same seams as a real mig
 
 > The playbook behind the code: **[docs/MIGRATION_PLAYBOOK.md](docs/MIGRATION_PLAYBOOK.md)**
 
+![Legacy Ext JS Tasks screen (left) and its React rewrite (right), selection kept in sync](docs/screenshots/side-by-side.jpg)
+
 ## Architecture
 
 ```mermaid
@@ -88,18 +90,18 @@ The shell consumes the widget as a built artifact, the same way it would consume
 
 Open `http://localhost:5173` (the dev server port can differ; see the terminal). One page, two panes:
 
-| Left: **Before** | Right: **After** |
-| --- | --- |
-| The original Ext JS screen: `Ext.define` classes, an `Ext.data.Store`, ViewModel `bind`, a ViewController | The React rewrite: TanStack Query, TanStack Table, React Hook Form + Zod |
-| Rendered by Ext as `xtype: 'tasks-main'` | Rendered inside the same Ext page by `xtype: 'reacthost'`, which lazy-loads `mountTasksWidget` |
+| Left: **Before**                                                                                          | Right: **After**                                                                               |
+| --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| The original Ext JS screen: `Ext.define` classes, an `Ext.data.Store`, ViewModel `bind`, a ViewController | The React rewrite: TanStack Query, TanStack Table, React Hook Form + Zod                       |
+| Rendered by Ext as `xtype: 'tasks-main'`                                                                  | Rendered inside the same Ext page by `xtype: 'reacthost'`, which lazy-loads `mountTasksWidget` |
 
 Both sides share one session and one typed event bus, so they stay in sync:
 
-* Click a row on either side and the same task is selected on the other (`taskselect` ↔ `task:selected`).
-* Save a task on either side and the other grid and form update. The shell is the single writer of the shared Ext store.
-* The status bar shows the last bridge event and which framework sent it.
-* Edit a task in React, then click another row: the React confirm dialog stacks above Ext using the shell's z-index manager.
-* `?lang=de` switches both frameworks to the German catalog.
+- Click a row on either side and the same task is selected on the other (`taskselect` ↔ `task:selected`).
+- Save a task on either side and the other grid and form update. The shell is the single writer of the shared Ext store.
+- The status bar shows the last bridge event and which framework sent it.
+- Edit a task in React, then click another row: the React confirm dialog stacks above Ext using the shell's z-index manager.
+- `?lang=de` switches both frameworks to the German catalog.
 
 In production the same host component sits behind the per-module feature-flag router in `packages/bridge` (`?ui=react|legacy`, localStorage, kill switch), so each screen is flipped on its own. The demo shows both versions at once instead.
 
@@ -122,12 +124,12 @@ npm run build
 npm run codegen     # regenerate the Task contract from the Ext model
 ```
 
-| Suite | Covers |
-| --- | --- |
+| Suite                  | Covers                                                                                                                                                                                                                                                     |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `packages/bridge/test` | event bus semantics and type narrowing, legacy adapter (validation, echo suppression, disconnect), `useExtStore` reactivity and cleanup, `Bridge.ReactHost` mount/update/resize/destroy/late-load/error, feature-flag precedence, contract and i18n parity |
-| `codemods/test` | model extraction, emitted schema/interface/defaults, schema behaviour, **drift guard** against the checked-in contract, failure on non-literal bodies |
-| `react-app` | Tasks module: sorting parity, filters, cross-UI search, validation messages, save events, legacy-originated saves, unsaved-change confirm, error state; widget entry points: mount, update, style ref-counting, unmount, legacy store summary |
-| `legacy-extjs/test` | ExtLite class system, data package, MVVM bindings, ViewController listen domains, grid, destroy cleanup |
+| `codemods/test`        | model extraction, emitted schema/interface/defaults, schema behaviour, **drift guard** against the checked-in contract, failure on non-literal bodies                                                                                                      |
+| `react-app`            | Tasks module: sorting parity, filters, cross-UI search, validation messages, save events, legacy-originated saves, unsaved-change confirm, error state; widget entry points: mount, update, style ref-counting, unmount, legacy store summary              |
+| `legacy-extjs/test`    | ExtLite class system, data package, MVVM bindings, ViewController listen domains, grid, destroy cleanup                                                                                                                                                    |
 
 ## The migration story
 
@@ -143,13 +145,13 @@ The code here keeps every one of those seams, at a size you can read end to end.
 
 ## Notable decisions
 
-* **ExtLite instead of Ext JS.** Ext JS is commercial and not usable from npm, so `legacy-extjs/src/extlite` re-implements the parts a migration has to deal with (class system with `config`/`apply`/`update`, `callParent`, mixins, observable events, stores with proxies, MVVM binding, controller `listen` domains, grid/form components) with matching semantics, including the awkward ones (renderers returning HTML, records mutating in place, define-time evaluation).
-* **Framework-agnostic host contract.** The shell only knows `(el, props) => { update, unmount, resize }`, so it never imports React and the widget bundle can be versioned and deployed separately.
-* **Explicit `HostContext`.** Widgets receive bus, session, translator, API base URL, z-index allocator and legacy stores as props. No widget reads Ext globals, which is what makes the standalone app and the tests possible.
-* **Generated contracts with a drift guard** instead of hand-written duplicate types.
-* **Each widget mount owns its QueryClient** to avoid accidental cache sharing between independently mounted modules; cross-module consistency goes through bus events.
-* **Single writer** for legacy data during coexistence: the shell controller applies `task:saved` to the Ext store, whichever UI produced it.
-* **Bridge consumed from source** via Vite aliases in app, widget and tests, so nothing depends on a stale `dist/`. `tsc` still builds the package for publishing.
+- **ExtLite instead of Ext JS.** Ext JS is commercial and not usable from npm, so `legacy-extjs/src/extlite` re-implements the parts a migration has to deal with (class system with `config`/`apply`/`update`, `callParent`, mixins, observable events, stores with proxies, MVVM binding, controller `listen` domains, grid/form components) with matching semantics, including the awkward ones (renderers returning HTML, records mutating in place, define-time evaluation).
+- **Framework-agnostic host contract.** The shell only knows `(el, props) => { update, unmount, resize }`, so it never imports React and the widget bundle can be versioned and deployed separately.
+- **Explicit `HostContext`.** Widgets receive bus, session, translator, API base URL, z-index allocator and legacy stores as props. No widget reads Ext globals, which is what makes the standalone app and the tests possible.
+- **Generated contracts with a drift guard** instead of hand-written duplicate types.
+- **Each widget mount owns its QueryClient** to avoid accidental cache sharing between independently mounted modules; cross-module consistency goes through bus events.
+- **Single writer** for legacy data during coexistence: the shell controller applies `task:saved` to the Ext store, whichever UI produced it.
+- **Bridge consumed from source** via Vite aliases in app, widget and tests, so nothing depends on a stale `dist/`. `tsc` still builds the package for publishing.
 
 ## License
 
